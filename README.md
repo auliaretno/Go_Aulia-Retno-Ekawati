@@ -1,1 +1,0 @@
-# Go_Aulia-Retno-Ekawati
