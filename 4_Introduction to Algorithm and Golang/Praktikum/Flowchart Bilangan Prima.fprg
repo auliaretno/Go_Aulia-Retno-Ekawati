@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="3.0">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="user"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2023-02-19 12:08:11 PM"/>
+        <attribute name="created" value="dXNlcjtBVUxJQTsyMDIzLTAyLTE5OzExOjA1OjExIEFNOzIwNjg="/>
+        <attribute name="edited" value="dXNlcjtBVUxJQTsyMDIzLTAyLTE5OzEyOjA4OjExIFBNOzQ7MjE5OA=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="N, i, a" type="Integer" array="False" size=""/>
+            <assign variable="a" expression="0"/>
+            <input variable="N"/>
+            <for variable="i" start="1" end="N" direction="inc" step="1">
+                <if expression="N % i == 0">
+                    <then>
+                        <assign variable="a" expression="a + 1"/>
+                    </then>
+                    <else/>
+                </if>
+            </for>
+            <if expression="a = 2">
+                <then>
+                    <output expression="N&amp; &quot;Bilangan Prima&quot;" newline="True"/>
+                </then>
+                <else>
+                    <output expression="N&amp; &quot;Bukan Bilangan Prima&quot;" newline="True"/>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>

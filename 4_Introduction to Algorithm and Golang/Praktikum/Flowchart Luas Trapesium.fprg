@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="3.0">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="user"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2023-02-19 01:04:54 PM"/>
+        <attribute name="created" value="dXNlcjtBVUxJQTsyMDIzLTAyLTE5OzEyOjE2OjE3IFBNOzIwOTI="/>
+        <attribute name="edited" value="dXNlcjtBVUxJQTsyMDIzLTAyLTE5OzAxOjA0OjU0IFBNOzY7MjIwMQ=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="a, b, t, L" type="Integer" array="False" size=""/>
+            <input variable="a"/>
+            <input variable="b"/>
+            <input variable="t"/>
+            <assign variable="L" expression="a*b*t/2"/>
+            <output expression="L" newline="True"/>
+        </body>
+    </function>
+    <function name="Start" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="a, b, t, L" type="Integer" array="False" size=""/>
+            <input variable="a"/>
+            <input variable="b"/>
+            <input variable="t"/>
+            <input variable="L"/>
+            <assign variable="L" expression="a*b*t/2"/>
+            <output expression="L" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>
