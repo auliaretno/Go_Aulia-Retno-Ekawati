@@ -18,3 +18,5 @@ Versioning : mengatur versi dari source code program. Melakukan pengaturan versi
 
 ## Pengertian GIT
 GIT merupakan salah satu version Control System populer yang digunakan para developer untuk mengembangkan software secara bersama-sama. thank you
+
+aulia retno
