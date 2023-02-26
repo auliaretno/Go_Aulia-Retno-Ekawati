@@ -11,7 +11,7 @@ Versioning : mengatur versi dari source code program. Melakukan pengaturan versi
 - Source Code Manager (SCM)
 - Revision Control System (RCS)
 
-## Version Control System (RCS)
+## Version Control System (VCS)
 - Single User
 - Centralized
 - Distributed
