@@ -19,7 +19,7 @@ mkdir about_me/personal
 # Buat file "facebook.txt" di dalam "about_me/personal"
 echo "URL Facebook: <URL Facebook>\nUsername: <auliaretno>" > about_me/personal/facebook.txt
 
-# Buat subfolder "professional" di dalam "about_me"
+# Buat subfolder "professional" didalam "about_me"
 mkdir about_me/professional
 
 # Buat file "linkedin.txt" di dalam "about_me/professional"
