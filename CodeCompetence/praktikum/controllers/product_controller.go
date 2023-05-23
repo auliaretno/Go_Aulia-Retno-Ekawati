@@ -10,7 +10,7 @@ import (
 )
 
 func GetBooksController(c echo.Context) error {
-	var books []models.Barang
+	var books []models.Product
 
 	if err := config.DB.Find(&books).Error; err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, map[string]string{
@@ -33,7 +33,7 @@ func GetBookController(c echo.Context) error {
 		})
 	}
 
-	var book models.Barang
+	var book models.Product
 	if err = config.DB.Where("id = ?", id).First(&book).Error; err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -46,7 +46,7 @@ func GetBookController(c echo.Context) error {
 
 // create new book
 func CreateBookController(c echo.Context) error {
-	book := models.Barang{}
+	book := models.Product{}
 	c.Bind(&book)
 
 	if err := config.DB.Save(&book).Error; err != nil {
@@ -67,7 +67,7 @@ func DeleteBookController(c echo.Context) error {
 		})
 	}
 
-	var book models.Barang
+	var book models.Product
 	if err := config.DB.First(&book, "id = ? ", id).Error; err != nil {
 		return c.JSON(http.StatusNotFound, map[string]string{
 			"message": "Book not found",
@@ -96,7 +96,7 @@ func UpdateBookController(c echo.Context) error {
 		})
 	}
 
-	var book models.Barang
+	var book models.Product
 	if err := config.DB.Where("id = ?", id).First(&book).Error; err != nil {
 		return echo.NewHTTPError(http.StatusNotFound, map[string]string{
 			"message": "User not found",

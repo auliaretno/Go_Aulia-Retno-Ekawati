@@ -6,7 +6,7 @@ import (
 )
 
 func GetBooksController() (interface{}, error) {
-	var books []models.Barang
+	var books []models.Product
 
 	if err := config.DB.Find(&books).Error; err != nil {
 		return nil, err
@@ -15,7 +15,7 @@ func GetBooksController() (interface{}, error) {
 }
 
 func GetBookController(bookID int) (interface{}, error) {
-	var book models.Barang
+	var book models.Product
 	book.ID = uint(bookID)
 
 	if err := config.DB.First(&book).Error; err != nil {
@@ -25,7 +25,7 @@ func GetBookController(bookID int) (interface{}, error) {
 	return book, nil
 }
 
-func CreateBookController(b models.Barang) (interface{}, error) {
+func CreateBookController(b models.Product) (interface{}, error) {
 	err := config.DB.Create(&b).Error
 
 	if err != nil {
@@ -35,14 +35,14 @@ func CreateBookController(b models.Barang) (interface{}, error) {
 	return b, nil
 }
 
-func UpdateBookController(bookID uint, b models.Barang) (interface{}, error) {
-	book := models.Barang{}
+func UpdateBookController(bookID uint, b models.Product) (interface{}, error) {
+	book := models.Product{}
 	book.ID = bookID
 	if err := config.DB.First(&book).Error; err != nil {
 		return nil, err
 	}
 
-	book.Name = b.Name
+	book.Merk = b.Merk
 	book.Description = b.Description
 	book.Stock = b.Stock
 	book.Price = b.Price
@@ -55,7 +55,7 @@ func UpdateBookController(bookID uint, b models.Barang) (interface{}, error) {
 }
 
 func DeleteBookController(bookID int) (interface{}, error) {
-	err := config.DB.Delete(&models.Barang{}, bookID).Error
+	err := config.DB.Delete(&models.Product{}, bookID).Error
 
 	if err != nil {
 		return nil, err

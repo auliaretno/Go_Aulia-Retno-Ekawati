@@ -35,5 +35,15 @@ func New() *echo.Echo {
 	eBook.PUT("/:id", controllers.UpdateBookController)
 	eBook.DELETE("/:id", controllers.DeleteBookController)
 
+		//categories routes
+	eCategory := e.Group("/categories")
+		// Authenticated with JWT
+	eCategory.Use(mid.JWT([]byte(constants.SECRET_JWT)))
+	eCategory.GET("", controllers.GetCategoriesController)
+	eCategory.GET("/:id", controllers.GetCategoryController)
+	eCategory.POST("", controllers.CreateCategoryController,)
+	eCategory.PUT("/:id", controllers.UpdateCategoryController)
+	eCategory.DELETE("/:id", controllers.DeleteCategoryController)
+
 	return e
 }
