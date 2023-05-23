@@ -9,23 +9,23 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func GetBooksController(c echo.Context) error {
-	var books []models.Product
+func GetProductsController(c echo.Context) error {
+	var products []models.Product
 
-	if err := config.DB.Find(&books).Error; err != nil {
+	if err := config.DB.Find(&products).Error; err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, map[string]string{
 			"message": err.Error(),
 		})
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
-		"message": "Success get data books",
-		"data":    books,
+		"message": "Success get data products",
+		"data":    products,
 	})
 }
 
-// get book by id
-func GetBookController(c echo.Context) error {
+// get product by id
+func GetProductController(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{
@@ -33,33 +33,33 @@ func GetBookController(c echo.Context) error {
 		})
 	}
 
-	var book models.Product
-	if err = config.DB.Where("id = ?", id).First(&book).Error; err != nil {
+	var product models.Product
+	if err = config.DB.Where("id = ?", id).First(&product).Error; err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
-		"message": "Success get book by id",
-		"user":    book,
+		"message": "Success get product by id",
+		"user":    product,
 	})
 }
 
-// create new book
-func CreateBookController(c echo.Context) error {
-	book := models.Product{}
-	c.Bind(&book)
+// create new product
+func CreateProductController(c echo.Context) error {
+	product := models.Product{}
+	c.Bind(&product)
 
-	if err := config.DB.Save(&book).Error; err != nil {
+	if err := config.DB.Save(&product).Error; err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 	return c.JSON(http.StatusOK, map[string]interface{}{
-		"message": "success create new book",
-		"user":    book,
+		"message": "success create new product",
+		"user":    product,
 	})
 }
 
-// delete book by id
-func DeleteBookController(c echo.Context) error {
+// delete product by id
+func DeleteProductController(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{
@@ -67,28 +67,28 @@ func DeleteBookController(c echo.Context) error {
 		})
 	}
 
-	var book models.Product
-	if err := config.DB.First(&book, "id = ? ", id).Error; err != nil {
+	var product models.Product
+	if err := config.DB.First(&product, "id = ? ", id).Error; err != nil {
 		return c.JSON(http.StatusNotFound, map[string]string{
-			"message": "Book not found",
+			"message": "product not found",
 		})
 	}
 
-	if err := config.DB.Delete(&book).Error; err != nil {
+	if err := config.DB.Delete(&product).Error; err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{
-			"message": "Failed to delete book data",
+			"message": "Failed to delete product data",
 			"error":   err.Error(),
 		})
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
-		"message": "Successfully deleted book data",
-		"data":    book,
+		"message": "Successfully deleted product data",
+		"data":    product,
 	})
 }
 
-// update book by id
-func UpdateBookController(c echo.Context) error {
+// update product by id
+func UpdateProductController(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{

@@ -5,27 +5,27 @@ import (
 	"code_competence/models"
 )
 
-func GetBooksController() (interface{}, error) {
-	var books []models.Product
+func GetProductsController() (interface{}, error) {
+	var products []models.Product
 
-	if err := config.DB.Find(&books).Error; err != nil {
+	if err := config.DB.Find(&products).Error; err != nil {
 		return nil, err
 	}
-	return books, nil
+	return products, nil
 }
 
-func GetBookController(bookID int) (interface{}, error) {
-	var book models.Product
-	book.ID = uint(bookID)
+func GetProductController(productID int) (interface{}, error) {
+	var product models.Product
+	product.ID = uint(productID)
 
-	if err := config.DB.First(&book).Error; err != nil {
+	if err := config.DB.First(&product).Error; err != nil {
 		return nil, err
 	}
 
-	return book, nil
+	return product, nil
 }
 
-func CreateBookController(b models.Product) (interface{}, error) {
+func CreateProductController(b models.Product) (interface{}, error) {
 	err := config.DB.Create(&b).Error
 
 	if err != nil {
@@ -35,30 +35,30 @@ func CreateBookController(b models.Product) (interface{}, error) {
 	return b, nil
 }
 
-func UpdateBookController(bookID uint, b models.Product) (interface{}, error) {
-	book := models.Product{}
-	book.ID = bookID
-	if err := config.DB.First(&book).Error; err != nil {
+func UpdateProductController(productID uint, b models.Product) (interface{}, error) {
+	product := models.Product{}
+	product.ID = productID
+	if err := config.DB.First(&product).Error; err != nil {
 		return nil, err
 	}
 
-	book.Merk = b.Merk
-	book.Description = b.Description
-	book.Stock = b.Stock
-	book.Price = b.Price
+	product.Merk = b.Merk
+	product.Description = b.Description
+	product.Stock = b.Stock
+	product.Price = b.Price
 
-	if err := config.DB.Save(&book).Error; err != nil {
+	if err := config.DB.Save(&product).Error; err != nil {
 		return nil, err
 	}
 
-	return book, nil
+	return product, nil
 }
 
-func DeleteBookController(bookID int) (interface{}, error) {
-	err := config.DB.Delete(&models.Product{}, bookID).Error
+func DeleteProductController(productID int) (interface{}, error) {
+	err := config.DB.Delete(&models.Product{}, productID).Error
 
 	if err != nil {
 		return nil, err
 	}
-	return bookID, nil
+	return productID, nil
 }

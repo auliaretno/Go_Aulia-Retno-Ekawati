@@ -25,16 +25,6 @@ func New() *echo.Echo {
 	eUserJwt.PUT("/:id", controllers.UpdateUserController)
 	eUserJwt.DELETE("/:id", controllers.DeleteUserController)
 
-	// books routes
-	eBook := e.Group("/books")
-	// Authenticated with JWT
-	eBook.Use(mid.JWT([]byte(constants.SECRET_JWT)))
-	eBook.GET("", controllers.GetBooksController)
-	eBook.POST("", controllers.CreateBookController)
-	eBook.GET("/:id", controllers.GetBookController)
-	eBook.PUT("/:id", controllers.UpdateBookController)
-	eBook.DELETE("/:id", controllers.DeleteBookController)
-
 		//categories routes
 	eCategory := e.Group("/categories")
 		// Authenticated with JWT
