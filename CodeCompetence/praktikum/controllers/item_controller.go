@@ -11,17 +11,14 @@ import (
 )
 
 func GetItemsController(c echo.Context) error {
-	var items []models.Item
-
-	if err := config.DB.Find(&items).Error; err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, map[string]string{
-			"message": err.Error(),
-		})
+	items, err := database.GetItemsController()
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
-		"message": "Success get data items",
-		"data":    items,
+		"messages":  "success get all products",
+		"items": items,
 	})
 }
 
@@ -48,41 +45,32 @@ func CreateItemController(c echo.Context) error {
 	item := models.Item{}
 	c.Bind(&item)
 
-	if err := config.DB.Save(&item).Error; err != nil {
+	result, err := database.CreateItemController(item)
+	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
-	}
+	} 
+
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"message": "success create new item",
-		"user":    item,
+		"item":    result,
 	})
 }
 
 // delete item by id
 func DeleteItemController(c echo.Context) error {
-	id, err := strconv.Atoi(c.Param("id"))
+	itemID, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, map[string]string{
-			"message": "Invalid Id",
-		})
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
-	var item models.Item
-	if err := config.DB.First(&item, "id = ? ", id).Error; err != nil {
-		return c.JSON(http.StatusNotFound, map[string]string{
-			"message": "item not found",
-		})
-	}
-
-	if err := config.DB.Delete(&item).Error; err != nil {
-		return c.JSON(http.StatusInternalServerError, map[string]string{
-			"message": "Failed to delete item data",
-			"error":   err.Error(),
-		})
+	result, err := database.DeleteItemController(itemID)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
 	return c.JSON(http.StatusOK, map[string]interface{}{
-		"message": "Successfully deleted item data",
-		"data":    item,
+		"messages": "success delete product",
+		"id":       result,
 	})
 }
 
