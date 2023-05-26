@@ -25,6 +25,17 @@ func GetItemController(itemID uint) (interface{}, error) {
 	return item, nil
 }
 
+func GetItemIDController(Category int) (interface{}, error) {
+	var item []models.Item
+	Category = int(Category)
+
+	if err := config.DB.Where("category_id = ?", Category).Preload("Category").Find(&item).Error; err != nil {
+		return nil, err
+	}
+
+	return item, nil
+}
+
 func CreateItemController(b models.Item) (interface{}, error) {
 	if err := config.DB.Create(&b).Error; err != nil {
 		return nil, err

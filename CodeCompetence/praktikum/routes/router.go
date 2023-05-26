@@ -45,6 +45,7 @@ func New() *echo.Echo {
 	eItem.POST("", controllers.CreateItemController,)
 	eItem.PUT("/:id", controllers.UpdateItemController)
 	eItem.DELETE("/:id", controllers.DeleteItemController)
+	eItem.GET("/category/:id", controllers.GetItemIDController)
 
 	return e
 }

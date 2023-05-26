@@ -40,6 +40,24 @@ func GetItemController(c echo.Context) error {
 	})
 }
 
+// get item by id category
+func GetItemIDController(c echo.Context) error {
+	Category, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+
+	item, err := database.GetItemIDController(Category)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+
+	return c.JSON(http.StatusOK, map[string]interface{}{
+		"messages": "success get item",
+		"items": item,
+	})
+}
+
 // create new item
 func CreateItemController(c echo.Context) error {
 	item := models.Item{}
