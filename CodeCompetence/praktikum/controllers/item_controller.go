@@ -102,7 +102,7 @@ func UpdateItemController(c echo.Context) error {
 	}
 
 	var item models.Item
-	if err := config.DB.Where("id = ?", id).First(&item).Error; err != nil {
+	if err := config.DB.Where("id = ?", id).Preload("Category").Find(&item).Error; err != nil {
 		return echo.NewHTTPError(http.StatusNotFound, map[string]string{
 			"message": "Item not found",
 		})

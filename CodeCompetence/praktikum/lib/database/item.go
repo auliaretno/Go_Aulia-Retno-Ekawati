@@ -51,7 +51,7 @@ func CreateItemController(b models.Item) (interface{}, error) {
 func UpdateItemController(itemID uint, b models.Item) (interface{}, error) {
 	item := models.Item{}
 	item.ID = itemID
-	if err := config.DB.Preload("Category").First(&item).Error; err != nil {
+	if err := config.DB.Preload("Category").Find(&item).Error; err != nil {
 		return nil, err
 	}
 
